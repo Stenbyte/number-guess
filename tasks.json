@@ -4,5 +4,21 @@
     "title": "new task2",
     "description": "cool1234",
     "status": "pending"
+  },
+  {
+    "id": 2,
+    "title": "cool",
+    "description": "task",
+    "status": "started",
+    "created": "2024-12-05T10:29:36.602Z",
+    "updated": "2024-12-05T10:47:20.651Z"
+  },
+  {
+    "id": 3,
+    "title": "cooltask2",
+    "description": "simple text",
+    "status": "completed",
+    "created": "2024-12-05T10:36:30.480Z",
+    "updated": "2024-12-05T10:46:53.882Z"
   }
 ]

@@ -37,6 +37,8 @@ program
       title,
       description: description || "",
       status: "pending",
+      created: new Date(),
+      updated: "",
     };
     tasks.push(newTask);
     await writeTasks(tasks);
@@ -67,6 +69,7 @@ program
       if (options[key]) {
         tasks[taskIndex][prop] = options[key];
       }
+      tasks[taskIndex].updated = new Date();
     });
 
     await writeTasks(tasks);
@@ -89,19 +92,38 @@ program
   });
 
 // LIst All Tasks
-
-// todo add filter to list by status and custom filter or date. Check how tu run it from terminal outside of the project, probably zhsl file needs to be updated. Enabled debugger in vscode
+// Check how tu run it from terminal outside of the project, probably zhsl file needs to be updated.
+// error handle when invalid flag is passed, generic function would be nice
 program
   .command("list")
-  .description("List all tasks")
-  .action(async (id) => {
+  .description("Fetches tasks")
+  .option("--all", "Fetches all tasks")
+  .option("--p", "Fetches pending tasks")
+  .option("--s", "Fetches started tasks")
+  .option("--c", "Fetches completed tasks")
+  .action(async (options) => {
     const tasks = await readTasks();
     if (tasks.length === 0) {
       console.log("Tasks not found!");
       return;
     }
-    console.info("------List of all tasks-------");
-    console.table(tasks);
+    let filterTasks = [];
+    if (!options.all) {
+      const filtersMap = {
+        p: "pending",
+        s: "started",
+        c: "completed",
+      };
+
+      Object.entries(filtersMap).forEach(([key, status]) => {
+        if (options[key]) {
+          filterTasks = tasks.filter((task) => task.status === status);
+        }
+      });
+    }
+
+    console.info("------TASKS-------");
+    console.table(options.all ? tasks : filterTasks);
   });
 
 program.parse(process.argv);
