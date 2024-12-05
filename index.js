@@ -67,7 +67,8 @@ program
 
     Object.entries(optionsFlags).forEach(([key, prop]) => {
       if (options[key]) {
-        tasks[taskIndex][prop] = options[key];
+        tasks[taskIndex][prop] =
+          key === "s" ? options[key].toLowerCase() : options[key];
       }
       tasks[taskIndex].updated = new Date();
     });
@@ -91,9 +92,9 @@ program
     console.log("Task deleted.");
   });
 
-// LIst All Tasks
-// Check how tu run it from terminal outside of the project, probably zhsl file needs to be updated.
-// error handle when invalid flag is passed, generic function would be nice
+/* 
+Lists task with filters applied
+*/
 program
   .command("list")
   .description("Fetches tasks")
