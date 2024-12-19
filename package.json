@@ -1,5 +1,5 @@
 {
-  "name": "task-tracker",
+  "name": "number-guess",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,9 +8,5 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "commander": "^12.1.0",
-    "fs-extra": "^11.2.0"
-  }
+  "license": "ISC"
 }
