@@ -1,2 +1,37 @@
 const readLine = require("readline");
 
+const rl = readLine.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+function startGame() {
+  console.log("--------------------------------------------------------------");
+  console.log(`
+    Welcome to the Number Guessing Game!
+    Rules:
+    1. The computer will randomly select a number between 1 and 100.
+    2. You have a limited number of chances to guess the correct number.
+    3. After each guess, you will receive a hint if the guess is too high or too low.
+    4. If you guess correctly, you win! Otherwise, you lose when you run out of chances.
+    `);
+  console.log("--------------------------------------------------------------");
+
+  const maxAttempts = 7;
+  let leftAttempts = maxAttempts;
+  const numberToGuess = Math.floor(Math.random() * 100) + 1;
+
+  rl.question(
+    '"I have selected a number between 1 and 100. Can you guess it?" Type [Yes/No] to continue, or to close the programm: ',
+    (answer) => {
+      if (answer === "Yes") {
+        askForGuess();
+      } else {
+        rl.close();
+      }
+    }
+  );
+
+  function askForGuess() {}
+}
+startGame();
