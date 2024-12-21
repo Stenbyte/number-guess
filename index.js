@@ -54,6 +54,11 @@ function startGame() {
 
         console.log(`Your guess hint. Number is ${hint}`);
         askForGuess();
+      } else {
+        console.log(
+          `You have run out of attempts. Lucky number was: ${numberToGuess}`
+        );
+        rl.close();
       }
     });
   }
