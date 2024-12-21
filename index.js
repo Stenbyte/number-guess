@@ -41,6 +41,20 @@ function startGame() {
         askForGuess();
         return;
       }
+
+      leftAttempts--;
+
+      if (userGuess === numberToGuess) {
+        console.log(
+          `Congrats you have won the game. Your lucky number is ${userGuess}`
+        );
+        rl.close();
+      } else if (leftAttempts > 0) {
+        const hint = userGuess > numberToGuess ? "too high" : "too low";
+
+        console.log(`Your guess hint. Number is ${hint}`);
+        askForGuess();
+      }
     });
   }
 }
