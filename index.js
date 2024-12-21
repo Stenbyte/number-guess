@@ -32,6 +32,16 @@ function startGame() {
     }
   );
 
-  function askForGuess() {}
+  function askForGuess() {
+    rl.question("Enter your guess ", (input) => {
+      const userGuess = parseInt(input, 10);
+
+      if (isNaN(userGuess) || userGuess < 1 || userGuess > 100) {
+        console.log(`Please provide a valid number between 1 - 100`);
+        askForGuess();
+        return;
+      }
+    });
+  }
 }
 startGame();
