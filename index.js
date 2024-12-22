@@ -22,6 +22,7 @@ function startGame() {
   let leftAttempts = maxAttempts;
   let rangeLimit = 100;
   let setHintDifficulty = "easy";
+  let numberOfAttempts = 0;
   const numberToGuess = Math.floor(Math.random() * rangeLimit) + 1;
   let startTime;
 
@@ -30,7 +31,6 @@ function startGame() {
     (answer) => {
       if (answer === "Yes") {
         startTime = Date.now();
-        // askForGuess();
         askDifficultyAndRange();
       } else {
         rl.close();
@@ -79,11 +79,12 @@ function startGame() {
       }
 
       leftAttempts--;
+      numberOfAttempts++;
       if (input !== "hint") {
         if (userGuess === numberToGuess) {
           const elapsedTime = Math.round((Date.now() - startTime) / 1000);
           console.log(
-            `Congrats you have won the game. Your lucky number is ${userGuess}`
+            `Congrats you have won the game. Your lucky number is ${userGuess}. Number of attempts to find lucky number is ${numberOfAttempts}`
           );
           console.log(`Time taken: ${elapsedTime} seconds`);
           rl.close();
