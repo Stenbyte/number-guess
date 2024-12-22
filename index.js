@@ -20,11 +20,13 @@ function startGame() {
   const maxAttempts = 7;
   let leftAttempts = maxAttempts;
   const numberToGuess = Math.floor(Math.random() * 100) + 1;
+  let startTime;
 
   rl.question(
     '"I have selected a number between 1 and 100. Can you guess it?" Type [Yes/No] to continue, or to close the programm: ',
     (answer) => {
       if (answer === "Yes") {
+        startTime = Date.now();
         askForGuess();
       } else {
         rl.close();
@@ -48,9 +50,11 @@ function startGame() {
       leftAttempts--;
 
       if (userGuess === numberToGuess) {
+        const elapsedTime = Math.round((Date.now() - startTime) / 1000);
         console.log(
           `Congrats you have won the game. Your lucky number is ${userGuess}`
         );
+        console.log(`Time taken: ${elapsedTime} seconds`);
         rl.close();
       } else if (leftAttempts > 0) {
         const hint = userGuess > numberToGuess ? "too high" : "too low";
@@ -69,6 +73,8 @@ function startGame() {
               leftAttempts = 1000;
               askForGuess();
             } else {
+              const elapsedTime = Math.round((Date.now() - startTime) / 1000);
+              console.log(`Time taken: ${elapsedTime} seconds`);
               rl.close();
             }
           }
