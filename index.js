@@ -42,7 +42,7 @@ function startGame() {
       "Set up you difficulty and range, or type fine to skip it: ",
       (input) => {
         if (input === "fine") {
-          rl.close();
+          askForGuess();
         } else {
           const result = setDifficultyAndRange(
             input,
