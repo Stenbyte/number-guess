@@ -34,6 +34,9 @@ function startGame() {
 
   function askForGuess() {
     rl.question("Enter your guess ", (input) => {
+      if (input === "quit") {
+        rl.close();
+      }
       const userGuess = parseInt(input, 10);
 
       if (isNaN(userGuess) || userGuess < 1 || userGuess > 100) {
@@ -58,7 +61,18 @@ function startGame() {
         console.log(
           `You have run out of attempts. Lucky number was: ${numberToGuess}`
         );
-        rl.close();
+
+        rl.question(
+          "Do you wish to continue playing? Type Yes, this will refresh your attempts to 1000. To abort game just type quit:",
+          (answer) => {
+            if (answer === "Yes") {
+              leftAttempts = 1000;
+              askForGuess();
+            } else {
+              rl.close();
+            }
+          }
+        );
       }
     });
   }
